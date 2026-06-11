@@ -1,0 +1,49 @@
+<!--This html file is used to set a progress bar using javascript-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Data Visualization/Home</title>
+</head>
+<body>
+<div class="container">
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+<h1>Data Visualization</h1>
+<h2>Convert your excel files into data visualization in real world.</h2>
+
+<a href="/history"><!--to add history button-->
+    <button type="button">
+        My History
+    </button>
+</a>
+
+<a href="/logout"><!--to add the logout button-->
+    <button type="button">Logout</button>
+</a><br><br>
+<h3>Upload Excel File</h3>
+<input type="file" id="fileInput">
+<br>
+<progress id="progressBar" value="0" max="100"></progress>
+
+<script>
+document.getElementById("fileInput").addEventListener("change", function() {
+    let file = this.files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "/home", true);
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            document.getElementById("progressBar").value =
+            (e.loaded / e.total) * 100;                     
+        }
+    };
+    xhr.onload = function() {
+        document.body.innerHTML = xhr.responseText;
+    };
+    xhr.send(formData);
+});
+</script>
+<p>{{ a|safe }}</p>
+</div>
+</body>
+</html>

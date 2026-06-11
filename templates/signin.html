@@ -1,0 +1,41 @@
+<!--This is the html file where login code is located-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Data Visualization/signin</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<body>
+    <!--This is for the left panel of the signin page-->
+    <div class="main_container">
+        <div class="left_panel">
+            <h1>Welcome to Data Visualizer</h1>
+        </div>
+    <!--This is for the right panel of the signin page-->
+        <div class="right_panel">
+            <div class="login_box">
+            <h3>Sign in</h3>
+            <p>{{ msg }}</p>
+            <form method="post" action="/">
+                <label>User Name</label>
+                <input type="text" name="username" class="input_box">
+                <br>
+                <br>
+                <label>Password</label>
+                <input type="password" name="password" class="input_box">
+                <br><br>
+                <p>Remember me 
+                <input
+                type="checkbox"
+                name="Remember me"
+                id="remember_me_1"
+                value="remeber me"></p>   
+                <br>
+                <button class="login_button" type="submit">Sign in</button>
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>

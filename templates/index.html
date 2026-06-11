@@ -1,0 +1,84 @@
+<!--This is the main html file-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Data Visualization</title>
+</head>
+<body>
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+<!--<div class="top-bar">-->
+    <div class="container">
+    <div class="top-bar">
+        <h2>Create Chart</h2>
+        <div class="nav-links">
+            <a href="/history" class="nav-btn">History</a>
+            <a href="/home" class="nav-btn">Back to Home</a>
+        </div>
+    </div>
+<br><br>
+<form action="/index" method="POST">
+    <label>Chart Type: </label>
+    <select name="chart_type">
+        <option value="line" {% if chart_type=="line" %}selected{% endif %}>Line Chart</option>
+        <option value="bar" {% if chart_type=="bar" %}selected{% endif %}>Bar Chart</option>
+        <option value="hist" {% if chart_type=="hist" %}selected{% endif %}>Histogram</option>
+        <option value="pie" {% if chart_type=="pie" %}selected{% endif %}>Pie Chart</option>
+        <option value="scatter" {% if chart_type=="scatter" %}selected{% endif %}>Scatter Plot</option>
+    </select>
+    <br><br>
+    <h4>Chart Inputs</h4>
+    <p>Select the Category and Value of your chart</p>
+     <p>To know more about chart inputs , click here
+        <!--To display a popup guide-->
+    <button type="button" onclick="document.getElementById('popup').showModal()">
+     View ℹ️ 
+    </button>
+    </p>
+    <label>Category (What to compare):</label>
+    <!--Jinja template to loop through the column headers of the excel file for "Category" variable-->
+    <select name="x_col">
+        {% for col in columns %}
+            <option value="{{ col }}">{{ col }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label>Value (What to measure):</label>
+    <!--Jinja template to loop through the column headers of the excel file for "Value" variable-->
+        <select name="y_col">
+            {% for col in columns %}
+            <option value="{{ col }}">{{ col }}</option>
+            {% endfor %}
+        </select>
+    <br><br>
+    <p>Enter the title of your chart</p>
+    <label>Title:</label>
+    <input type="text" name="title" required>
+    <br><br>
+    <button type="submit">Generate Chart</button>
+</form>
+<style>
+    dialog {
+        width: 650px;     /*To style to popup dialog*/
+        padding: 25px;     
+    }
+</style>
+<dialog id="popup">
+    <!--url for the popup image which is stored in the static folder-->
+  <img src="{{ url_for('static', filename='Sample_Chart.png') }}" width="100%"> 
+  <br><br>
+  <button type="button" onclick="document.getElementById('popup').close()">
+    Close
+  </button>
+</dialog>
+<hr>
+{% if chart_file %}
+    <h3>Generated Chart:</h3>
+    <!--To download the chart-->
+    <img src="{{ url_for('static', filename=chart_file) }}" width="500">
+    <br><br>
+    <button type="button"><a href="{{ url_for('static', filename=chart_file) }}" download>
+        Download Chart
+    </a></button>
+{% endif %}
+</body>
+</html>

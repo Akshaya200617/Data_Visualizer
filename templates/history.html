@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart History</title>
+</head>
+<body>
+<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+<div class="top-bar">
+    <h1>My Chart History</h1>
+    <div class="nav-links">
+        <a href="/home" class="nav-btn">
+            Back to Home
+        </a>
+    </div>
+</div>
+<hr>
+{% for chart in charts %}
+<div class="history-card">
+    <h3>{{ chart["chart_type"]|upper }} Chart</h3>
+    <p>
+        X Column: {{ chart["x_column"] }}
+    </p>
+    <p>
+        Y Column: {{ chart["y_column"] }}
+    </p>
+    <p>
+        Created: {{ chart["created_at"] }}
+    </p>
+    <img
+        src="{{ url_for('static', filename=chart['chart_file']) }}"
+        width="400"
+    >
+    <hr>
+</div>
+{% endfor %}
+</body>
+</html>

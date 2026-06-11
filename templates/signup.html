@@ -1,0 +1,39 @@
+<!--This file contains the html code for sign up page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Data Visualization/Sign Up</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="main_container">
+    <div class="left_panel">
+        <h1>JOIN US</h1>
+    </div>
+    <div class="right_panel">
+        <div class="signup_box">
+            <h2>Create Account</h2>
+            <p>{{msg}}</p>
+            <form method="post" action="/signup">
+                <label>Username</label>
+                <input type="text" name="username" class="input_box" required>
+                <br><br>
+                <label>Password</label>
+                <input type="password" name="password" class="input_box" required>
+                <br><br>
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="input_box" required>
+                <br><br>
+                <button type="submit">
+                    Sign Up
+                </button>
+                <p>
+                    Already have an account?
+                    <a href="\">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
