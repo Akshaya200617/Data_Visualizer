@@ -7,7 +7,7 @@ pipeline {
             steps {
                 git branch: 'main',
                 credentialsId: 'HariniGitID',
-                url: 'https://github.com/Akshaya200617/Simple-Data-Visualizer.git'
+                url: 'https://github.com/Akshaya200617/Data_Visualizer.git'
             }
         }
 
