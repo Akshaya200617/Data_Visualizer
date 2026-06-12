@@ -6,26 +6,26 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                credentialsId: 'HariniGitID',
+                credentialsId: 'Akshaya_Intern',
                 url: 'https://github.com/Akshaya200617/Data_Visualizer.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'py -m pip install -r requirements.txt'
+                sh 'py -m pip install -r requirements.txt'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t data-visualizer .'
+                sh 'docker build -t data-visualizer .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker run -d -p 2000:5000 data-visualizer'
+                sh 'docker run -d -p 2000:5000 data-visualizer'
             }
         }
     }
